@@ -1,27 +1,58 @@
-# 🎙️ 语音监听模块（listener）
+# 👂 主监听模块（listener）
 
 ## 模块简介
-该模块用于监听用户语音输入，并进行本地语音识别。支持中英文混合语音识别，使用 whisper 或 faster-whisper 实现，适配低性能本地设备。该模块作为整个贾维斯系统的输入入口。
+本模块负责持续监听用户语音输入，判断是否需要唤醒 AI 助理、调用 GPT 模型、控制外设等。它是语音系统的核心调度器，协调语音识别（voice_core）与智能应答（chatgpt_interface）。
+
+---
 
 ## 核心功能
-- 实时监听麦克风输入
-- 离线语音识别（无需联网）
-- 支持唤醒词触发（可选）
-- 多语言自动判断（可选）
+- 被动监听麦克风音频
+- 唤醒词识别（如“小Z”、“贾维斯”）
+- 动态判断是否进入交互模式
+- 转录语音、传递给 GPT 模型
+- 播放返回结果
+- 支持“睡眠”、“静音”、“重启”等语音指令
 
-## 依赖建议
-- `faster-whisper`（推荐）
-- `pyaudio` 或 `sounddevice`（用于音频输入）
-- `langdetect`（可选）
+---
 
-## 使用方法
-在主程序中导入本模块，或独立运行：
-```bash
-python listener.py
+## 工作流程
+```mermaid
+flowchart LR
+    Start(启动系统) --> Listen(监听麦克风)
+    Listen -->|检测到唤醒词| Wake[唤醒助手]
+    Wake --> Record[开始录音]
+    Record --> STT[调用语音识别]
+    STT --> GPT[传入 GPT 接口]
+    GPT --> TTS[合成语音]
+    TTS --> Play[播放语音]
+    Play --> Listen
+    Listen -->|未检测到唤醒词| Wait(继续监听)
 ```
 
-## 开发进度
-- [x] 基础语音监听
-- [ ] 加入唤醒词识别
-- [ ] 加入多语种识别支持
-- [ ] 与主控逻辑解耦
+---
+
+## 推荐依赖
+- `sounddevice` or `pyaudio`
+- `voice_core.stt`（语音识别）
+- `voice_core.tts`（语音合成）
+- `chatgpt_interface`（处理对话）
+- `threading`, `time`
+
+---
+
+## 使用示例
+```python
+from listener import start_listener
+start_listener()
+```
+
+---
+
+## 开发计划
+- [x] 持续监听音频
+- [x] 唤醒词检测机制
+- [x] 与 GPT 模块联动
+- [x] 支持语音播报结果
+- [ ] 多房间监听管理器
+- [ ] 离线模式自动切换
+- [ ] 可训练唤醒词
