@@ -1,27 +1,57 @@
-# 🎙️ Listener Module (listener)
+# 👂 Main Listener Module (listener)
 
 ## Module Overview
-This module listens to user voice input and performs local speech recognition. It supports mixed Chinese and English and uses models like `whisper` or `faster-whisper`, optimized for offline usage on low-end machines. It serves as the input gateway for the entire SmartDormAI system.
+This module listens to microphone input in real time, detects wake words, activates SmartDormAI, and routes voice input to GPT. It acts as the controller between `voice_core`, `chatgpt_interface`, and external hardware.
+
+---
 
 ## Core Features
-- Real-time microphone input monitoring
-- Offline speech-to-text conversion (no internet required)
-- Optional wake-word trigger
-- Optional language auto-detection
+- Passive audio listening
+- Wake word detection (e.g., "Xiao Z", "Jarvis")
+- Activates assistant on trigger
+- Transcribes voice to text and sends to GPT
+- Speaks response back to user
+- Supports voice commands: "sleep", "mute", "restart", etc.
 
-## Recommended Dependencies
-- `faster-whisper` (preferred)
-- `pyaudio` or `sounddevice` (for capturing input)
-- `langdetect` (optional)
+---
 
-## Usage
-You can either import this module in the main program or run it independently:
-```bash
-python listener.py
+## Workflow
+```mermaid
+flowchart LR
+    Start(Startup) --> Listen(Listen to Mic)
+    Listen -->|Wake word| Wake[Wake Assistant]
+    Wake --> Record[Record Audio]
+    Record --> STT[Speech to Text]
+    STT --> GPT[Send to GPT]
+    GPT --> TTS[Text to Speech]
+    TTS --> Play[Play Audio]
+    Play --> Listen
+    Listen -->|No wake word| Wait(Idle Listening)
 ```
 
-## Development Progress
-- [x] Basic speech listener
-- [ ] Add wake-word detection
-- [ ] Add multilingual input support
-- [ ] Decouple from the main assistant logic
+---
+
+## Recommended Dependencies
+- `sounddevice` or `pyaudio`
+- `voice_core.stt` and `voice_core.tts`
+- `chatgpt_interface` (to send/receive replies)
+- `threading`, `time`
+
+---
+
+## Example Usage
+```python
+from listener import start_listener
+start_listener()
+```
+
+---
+
+## Development Roadmap
+- [x] Continuous microphone listening
+- [x] Wake word detection
+- [x] GPT message routing
+- [x] Response playback
+- [ ] Multi-room listener manager
+- [ ] Auto offline/online switch
+- [ ] Custom wake word training
