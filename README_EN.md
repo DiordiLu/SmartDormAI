@@ -1,81 +1,88 @@
-# Smart Dorm AI Assistant (Campus JARVIS)
 
-This project aims to build an intelligent voice assistant tailored for dormitory life. It combines local speech recognition, speech synthesis, device control, GPT dialogue integration, memory logging, and emotion-aware interaction—all running **without relying on the cloud**.
+# 🧠 SmartDormAI: Dormitory Smart Voice Assistant System
 
----
-
-## 🌟 Core Features
-
-- ✅ Local speech recognition (supports mixed English + Chinese)
-- ✅ Human-like voice responses (female voice style)
-- ✅ GPT-based smart conversation (cloud-assisted if enabled)
-- ✅ Control devices via voice: lights, AC, door
-- ✅ Face recognition at the door for identity filtering
-- ✅ Memory logging and daily upgrade via GPT summarization
-- ✅ Private data remains local by default
-- ✅ Modular design for future smart room expansion
+SmartDormAI is a locally-run assistant system designed for dormitory scenarios. It integrates voice understanding, emotion recognition, device control, identity authentication, and memory features. It runs on affordable second-hand mini PCs and supports bilingual speech interaction (Chinese + English) to ensure privacy and improve everyday convenience.
 
 ---
 
-## 📁 Project Structure
+## 📦 Module Structure
+
+| Module Directory        | Description                                      | Status                  |
+|-------------------------|--------------------------------------------------|--------------------------|
+| `listener/`             | Microphone listening and wake-word detection     | 📄 Docs ready / Pending  |
+| `voice_core/`           | Speech-to-text (STT) and text-to-speech (TTS)    | 📄 Docs ready / Pending  |
+| `speaker/`              | Playback module for assistant speech             | 📄 Docs ready / Pending  |
+| `chatgpt_interface/`    | GPT communication interface                      | 📄 Docs ready / Pending  |
+| `memory/`               | Local memory and history management              | 📄 Docs ready / Pending  |
+| `cloud_sync/`           | Cloud syncing and nighttime memory optimization  | 📄 Docs ready / Pending  |
+| `vision/`               | Camera-based capture and face recognition        | 📄 Docs ready / Pending  |
+| `control/`              | Device control: lights, AC, door, etc.           | 📄 Docs ready / Pending  |
+| `emotion/`              | Emotion detection and behavioral adaptation      | 📄 Docs ready / Pending  |
+| `multiroom/`            | Multi-room mic/speaker coordination              | 📄 Docs ready / Pending  |
+| `device_setup/`         | Setup and installation instructions              | 📄 Docs ready / Usable   |
+| `scheduler/`            | Task scheduling (e.g., night sync, reminders)    | 📝 In planning           |
+| `main_assistant.py`     | Main script integrating all modules              | ⏳ In sketching phase     |
+
+---
+
+## 🧠 Key Features
+
+- 🗣️ Bilingual (Chinese + English) voice interaction
+- 😌 Emotion-aware tone and response
+- 👤 Identity & permission recognition (face/voice)
+- 💾 Local-first memory with optional cloud sync
+- 🔊 Multi-room input/output voice architecture
+- 🤖 GPT-4o powered interaction and learning
+
+---
+
+## 💻 Recommended Hardware Platform
+
+| Component     | Recommended Device                  | Description                  |
+|---------------|--------------------------------------|------------------------------|
+| Main PC       | ThinkCentre Tiny / Dell Micro        | Affordable & efficient       |
+| Microphone    | USB or microphone array              | Accurate voice capture       |
+| Speaker       | USB/Bluetooth speaker                | For voice feedback per room  |
+| Camera        | Standard USB webcam                  | Door monitoring & recognition|
+
+---
+
+## 🚀 Quick Start (Ubuntu Example)
 
 ```bash
-SmartDormAI/
-├── main_assistant.py           # Main script
-├── listener/                   # Speech recognition module
-├── speaker/                    # Speech synthesis (TTS)
-├── chatgpt_interface/          # GPT communication module
-├── memory/                     # Logging and memory management
-├── cloud_sync/                 # Optional cloud sync and upgrades
-├── control_modules/            # Physical device control logic
-├── ui_monitor/                 # Optional UI status panel
-└── README.md                   # This documentation
+sudo apt update && sudo apt install python3-pip git ffmpeg portaudio19-dev -y
+git clone https://github.com/your_username/SmartDormAI.git
+cd SmartDormAI
+pip3 install -r requirements.txt
+python3 main_assistant.py
 ```
 
 ---
 
-## 💻 Recommended Environment
+## 📍 Development Progress
 
-- Hardware: Second-hand desktop (preferred over Raspberry Pi)
-- OS: Windows / Linux / macOS
-- Language: Python 3.10+
-- Key Tools:
-  - Speech-to-text: `faster-whisper` (local)
-  - TTS: `Edge-TTS`
-  - Face recognition: `face_recognition` or OpenCV + YOLO
-
----
-
-## 🧠 Development Roadmap (by Priority)
-
-| Priority | Feature Module             | Description                                         |
-|----------|----------------------------|-----------------------------------------------------|
-| ①        | Local speech input/output  | Listen and respond naturally via voice              |
-| ②        | GPT interface              | Enable “soulful” conversation                       |
-| ③        | Conversation logging       | Store all interactions locally                      |
-| ④        | Physical control modules   | Control lights, AC, etc. via voice                  |
-| ⑤        | Door control + monitoring  | Face ID filter, log entries, auto-light on entry    |
-| ⑥        | Cloud sync + daily upgrade | Summarize daily logs to update memory/personality   |
-| ⑦        | Emotion/personality engine | Adjust assistant tone based on emotional feedback   |
-| ⑧        | UI & desktop notifier      | Optional: GUI to notify alerts                      |
+| Feature Area                  | Status               |
+|-------------------------------|----------------------|
+| Module Documentation          | ✅ Completed          |
+| Voice Recognition / Playback  | ⏳ Not started        |
+| Vision & Camera Processing    | ⏳ Not started        |
+| Device Control Interface      | ⏳ Not started        |
+| GPT Integration & Caching     | 📝 In design          |
+| UI Window & Notification      | 📝 In design          |
+| Main Integration Architecture | ⏳ Early sketching    |
 
 ---
 
-## 🔐 Privacy and Licensing
+## 💰 Cost Estimation
 
-- All data is stored locally by default
-- GPT summaries (optional) upload logs only at night
-- Planned license: MIT
-
----
-
-## ✨ Vision
-
-> “I want an AI that doesn’t interrupt, but is always there.  
-She listens, helps, remembers, and evolves to understand me.”
+| Item                    | Description                                 | Monthly Estimate     |
+|-------------------------|---------------------------------------------|----------------------|
+| Local Voice + Hardware  | All modules run offline, no fees            | ✅ Free               |
+| GPT-4o API Usage        | 20–30 interactions/day via token pricing    | $30 – $50 USD        |
+| Cloud Sync              | GitHub / Self-hosted storage available      | Free or very low     |
 
 ---
 
-📌 Project Status: Early Development (June 2025)  
-🧠 Author: Diordi Lu + ChatGPT collaborative design  
-🛠️ Contributions & suggestions welcome!
+## 📄 License
+
+This project is for educational and prototyping purposes only. Feel free to adapt it for academic or private use.
