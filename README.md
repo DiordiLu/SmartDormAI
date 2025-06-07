@@ -1,3 +1,18 @@
+# 🧠 SmartDormAI — 原创设计声明 / Original Design Statement
+
+SmartDormAI 是由 **Diordi Lu** 于 2025 年 6 月首次提出并设计的宿舍智能语音助手系统。  
+本项目构想、模块架构、语音逻辑、情绪机制及 GPT 集成策略均为原创设计。
+
+本项目面向学习/展示用途，支持研究性毕业设计、私有部署、非商业化拓展。  
+任何形式的再发布、修改或改编请注明原始作者与项目链接。
+
+---
+
+SmartDormAI was originally conceptualized and designed by **Diordi Lu** in June 2025.  
+Its modular system, voice interaction framework, memory logic, and GPT integration are original and structured for educational use.
+
+This project is intended for academic research, private deployment, and non-commercial showcase.  
+Please attribute the original author and link if reused or modified.
 
 # 🧠 SmartDormAI：宿舍智能语音助手系统
 
